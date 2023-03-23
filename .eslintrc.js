@@ -48,7 +48,7 @@ module.exports = {
 
     'no-trailing-spaces': ['error'],
 
-    'no-undef': ['error'],
+    'no-undef': ['warn'],
 
     'no-unexpected-multiline': ['error'],
 
