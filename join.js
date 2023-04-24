@@ -1,3 +1,6 @@
 export default function join(array, separator) {
-  return array.join(separator)
+  if (Array.isArray(array)) {
+    return array.join(separator)
+  }
+  return ''
 }
