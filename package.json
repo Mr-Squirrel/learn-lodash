@@ -11,7 +11,7 @@
   "scripts": {
     "style": "eslint *.js",
     "pretest": "npm run style",
-    "test": "mocha -r esm test/*.test.js",
+    "test": "mocha -r esm test/*.js",
     "validate": "npm run style && npm run test"
   },
   "devDependencies": {
