@@ -1,3 +1,9 @@
+/**
+ * Converts string to camel case.
+ * @param {string} str - The string to convert.
+ * @returns {string}
+ */
+
 import join from './join.js'
 
 export default function camelCase(str) {
