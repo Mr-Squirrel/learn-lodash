@@ -3,44 +3,32 @@ import join from './join.js'
 export default function camelCase(str) {
   const parts = [...str].map((char, currentIndex, original) => {
 
-    //char.toLowerCase() + currentIndex
-
     const previous = original[currentIndex - 1] || ''
+    const next = (original[currentIndex + 1] || '').trim()
 
-    // I GET THE RIGHT RESULT HERE, WHYYYY
-    console.log(previous)
+    const bigChar = char.toUpperCase()
+    const smallChar = char.toLowerCase()
+
+    if (currentIndex !== 0 && next && next.toLowerCase() === next && bigChar === char) {
+      return char
+    }
 
     if (previous.trim() === '') {
-      return currentIndex === 0 ? char.toLowerCase() : char.toUpperCase()
+      return currentIndex === 0 ? smallChar : bigChar
     }
 
     if (previous == Number(previous)) {
-      return char.toUpperCase()
+      return bigChar
     }
 
     if (previous === previous.toUpperCase()) {
-      return char.toLowerCase()
+      return smallChar
     }
-    /*
-    Number(”6”) == ”6” // true
-    Number(”6”) === ”6” // false
-    Number(”c”) // NaN
-    */
 
     return char
   })
 
   const noEmptyStrings = parts.filter((str) => str !== ' ')
-  console.log(noEmptyStrings)
 
   return join(noEmptyStrings, '')
-
-  //const noEmptyStrings = parts.filter((str) => str !== ' ')
-
-
-  /*
-  const elem = noEmptyStrings.filter((word) => word.char[0])
-    .map(), .filter(), .filter(Boolean)
-    */
-
 }
