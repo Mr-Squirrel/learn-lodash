@@ -1,16 +1,20 @@
-import { falsey } from './test/utils'
-
 export default function slice(array, start, end) {
   const fixedStart = Number(start)
   // Number([[1], [2, 3]]) == NaN
-  const fixedEnd = isNaN(Number(end)) ? array.length : Number(end)
+  let fixedEnd = Number(end)
 
-  if (Number(end) === falsey) {
-    return 0
+  if (Array.isArray(end)) {
+    return array
+  } else if (end !== undefined && isNaN(end)) {
+    fixedEnd = 0
+  } else if (isNaN(fixedEnd)) {
+    fixedEnd = array.length
   }
+
 
   if (Array.isArray(array)) {
     return array.slice(fixedStart, fixedEnd)
   }
-  return Array
+
+  return []
 }
