@@ -79,7 +79,7 @@ describe('slice', () => {
   it('should coerce `start` and `end` to integers', () => {
     const positions = [[0.1, 1.6], ['0', 1], [0, '1'], ['1'], [NaN, 1], [1, NaN]]
 
-    const actual = lodashStable.map(positions, (pos) => slice.apply(_, [array].concat(pos)))
+    const actual = lodashStable.map(positions, (pos) => slice.apply(lodashStable, [array].concat(pos)))
 
     assert.deepStrictEqual(actual, [[1], [1], [1], [2, 3], [1], []])
   })
@@ -97,7 +97,7 @@ describe('slice', () => {
   it('should work in a lazy sequence', () => {
     const array = lodashStable.range(1, LARGE_ARRAY_SIZE + 1),
       length = array.length,
-      wrapped = _(array)
+      wrapped = lodashStable(array)
 
     lodashStable.each(['map', 'filter'], (methodName) => {
       assert.deepEqual(wrapped[methodName]().slice(0, -1).value(), array.slice(0, -1))
