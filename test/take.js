@@ -38,24 +38,24 @@ describe('take', () => {
   })
 
   it('should work in a lazy sequence', () => {
-    var array = lodashStable.range(1, LARGE_ARRAY_SIZE + 1),
-      predicate = function(value) { values.push(value); return isEven(value) },
-      values = [],
-      actual = _(array).take(2).take().value()
+    const array = lodashStable.range(1, LARGE_ARRAY_SIZE + 1)
+    const predicate = function(value) { values.push(value); return isEven(value) }
+    let values = []
+    let actual = lodashStable(array).take(2).take().value()
 
     assert.deepEqual(actual, take(take(array, 2)))
 
-    actual = _(array).filter(predicate).take(2).take().value()
+    actual = lodashStable(array).filter(predicate).take(2).take().value()
     assert.deepEqual(values, [1, 2])
-    assert.deepEqual(actual, take(take(_.filter(array, predicate), 2)))
+    assert.deepEqual(actual, take(take(lodashStable.filter(array, predicate), 2)))
 
-    actual = _(array).take(6).takeRight(4).take(2).takeRight().value()
-    assert.deepEqual(actual, _.takeRight(take(_.takeRight(take(array, 6), 4), 2)))
+    actual = lodashStable(array).take(6).takeRight(4).take(2).takeRight().value()
+    assert.deepEqual(actual, lodashStable.takeRight(take(lodashStable.takeRight(take(array, 6), 4), 2)))
 
     values = []
 
-    actual = _(array).take(array.length - 1).filter(predicate).take(6).takeRight(4).take(2).takeRight().value()
+    actual = lodashStable(array).take(array.length - 1).filter(predicate).take(6).takeRight(4).take(2).takeRight().value()
     assert.deepEqual(values, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-    assert.deepEqual(actual, _.takeRight(take(_.takeRight(take(_.filter(take(array, array.length - 1), predicate), 6), 4), 2)))
+    assert.deepEqual(actual, lodashStable.takeRight(take(lodashStable.takeRight(take(lodashStable.filter(take(array, array.length - 1), predicate), 6), 4), 2)))
   })
 })
