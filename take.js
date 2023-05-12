@@ -1,3 +1,10 @@
+/**
+ * Creates arrays based on the second argument.
+ * @param {array} originalArray - The array to take from
+ * @param {int} valueToTake - The number of elements to take
+ * @returns {array} - The array containing the taken elements
+ */
+
 export default function take(originalArray, valueToTake=1) {
   let valueToUse = valueToTake
 
