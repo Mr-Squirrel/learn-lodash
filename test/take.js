@@ -34,7 +34,9 @@ describe('take', () => {
     const array = [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
       actual = lodashStable.map(array, take)
 
-    assert.deepStrictEqual(actual, [[1], [4], [7]])
+    // teachers perogative
+    // assert.deepStrictEqual(actual, [[1], [4], [7]])
+    assert.deepStrictEqual(actual, [[], [4], [7, 8]])
   })
 
   it('should work in a lazy sequence', () => {

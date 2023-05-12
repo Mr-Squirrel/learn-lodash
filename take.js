@@ -1,25 +1,13 @@
-export default function take(originalArray, valueToTake) {
-  let newArray = []
-  newArray = originalArray
+export default function take(originalArray, valueToTake=1) {
+  let valueToUse = valueToTake
 
-  if (valueToTake === 2) {
-    return newArray.slice(0, 2)
+  if (!valueToUse) {
+    valueToUse = valueToUse === undefined ? 1 : 0
   }
-
-  const valueToUse =
-		valueToTake === undefined ? valueToTake : isNaN(Number(valueToTake)) ? 0 : Number(valueToTake)
 
   if (valueToUse < 1) {
     return []
   }
 
-  if (valueToTake < 1) {
-    return []
-  }
-
-  if (valueToTake >= newArray.length) {
-    return originalArray
-  }
-
-  return newArray
+  return originalArray.slice(0, valueToUse)
 }
