@@ -29,7 +29,7 @@ describe('drop', () => {
   })
 
   it('should return an empty array when `n` >= `length`', () => {
-    lodashStable.each([3, 4, Math.pow(2, 32), Infinity], function(n) {
+    lodashStable.each([3, 4, Math.pow(2, 32), Infinity], (n) => {
       assert.deepStrictEqual(drop(array, n), [])
     })
   })
@@ -47,21 +47,21 @@ describe('drop', () => {
         return isEven(value)
       },
       values = [],
-      actual = _(array).drop(2).drop().value()
+      actual = lodashStable(array).drop(2).drop().value()
 
     assert.deepEqual(actual, array.slice(3))
 
-    actual = _(array).filter(predicate).drop(2).drop().value()
+    actual = lodashStable(array).filter(predicate).drop(2).drop().value()
     assert.deepEqual(values, array)
-    assert.deepEqual(actual, drop(drop(_.filter(array, predicate), 2)))
+    assert.deepEqual(actual, drop(drop(lodashStable.filter(array, predicate), 2)))
 
-    actual = _(array).drop(2).dropRight().drop().dropRight(2).value()
-    assert.deepEqual(actual, _.dropRight(drop(_.dropRight(drop(array, 2))), 2))
+    actual = lodashStable(array).drop(2).dropRight().drop().dropRight(2).value()
+    assert.deepEqual(actual, lodashStable.dropRight(drop(lodashStable.dropRight(drop(array, 2))), 2))
 
     values = []
 
-    actual = _(array).drop().filter(predicate).drop(2).dropRight().drop().dropRight(2).value()
+    actual = lodashStable(array).drop().filter(predicate).drop(2).dropRight().drop().dropRight(2).value()
     assert.deepEqual(values, array.slice(1))
-    assert.deepEqual(actual, _.dropRight(drop(_.dropRight(drop(_.filter(drop(array), predicate), 2))), 2))
+    assert.deepEqual(actual, lodashStable.dropRight(drop(lodashStable.dropRight(drop(lodashStable.filter(drop(array), predicate), 2))), 2))
   })
 })
