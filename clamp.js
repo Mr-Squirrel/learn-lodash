@@ -23,9 +23,5 @@ export default function clamp(numberToClamp, minNum, maxNum = 0) {
     return maxNum
   }
 
-  if (isNaN(numberToClamp)) {
-    return Number(NaN)
-  }
-
   return numberToClamp
 }
