@@ -6,5 +6,9 @@
  */
 
 export default function filter(collection, requirement) {
-  return collection.filter((n) => requirement(n))
+  if (Array.isArray(collection)) {
+    return collection.filter((n) => requirement(n))
+  }
+  const objToArray = Object.values(collection)
+  return objToArray.filter((n) => requirement(n))
 }

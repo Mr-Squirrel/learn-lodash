@@ -11,3 +11,11 @@ describe('filter', () => {
     assert.deepStrictEqual(filter(array, isNaN), ['A'])
   })
 })
+
+describe('filter', () => {
+  const obj = { 1 : 'A', 2 : 'B', 3 : 'C', 4 : 5 }
+
+  it('should work with an object', () => {
+    assert.deepStrictEqual(filter(obj, (s) => typeof s === typeof 'string'), ['A', 'B', 'C'])
+  })
+})
