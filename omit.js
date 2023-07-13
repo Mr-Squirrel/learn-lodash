@@ -1,27 +1,38 @@
 /**
  *
  * @param {object} source - The object to remove from.
- * @param {array} paths - The elements that should be removed.
+ * @param {string|array} paths - The elements that should be removed.
  * @returns {object} - New object without removed elements.
  */
 
 export default function omit(source, ...paths) {
-  const flattenedPath = paths.flat()
-  const mappedFP = flattenedPath.map((i) => i.split('.'))
-  const sndFlat = mappedFP.flat()
+  const flattenedPath = paths
+    .flatMap((p) => p)
+    .flatMap((p) => isActualObject(p) && 'callee' in p ? [...p] : p)
+    .map((p) => p.toString())
 
-  const initial = {}
-  return Object.entries(source).reduce(
-    (memory, currItem) => {
-      const [key, val] = currItem
-      if (key !== sndFlat[0]) {
-        return { ...memory, [key]: val }
-      }
+  let toReturn = {}
+  for (const key in source) {
+    const val = source[key]
+    const matchingDeepPaths = flattenedPath
+      .filter((p) => !(isActualObject(source) && p in source) && p.startsWith(`${key}.`))
+      .map((p) => p.replace(`${key}.`, ''))
 
-      if (sndFlat.length > 1) {
-        return { ...memory, [key]: omit(val, sndFlat.slice(1))  }
-      }
+    if (flattenedPath.includes(key)) {
+      continue
+    }
 
-      return memory
-    }, initial)
+    if (matchingDeepPaths.length > 0) {
+      toReturn = {...toReturn, [key]: omit(val, matchingDeepPaths)}
+      continue
+    }
+
+    toReturn = {...toReturn, [key]: val}
+  }
+
+  return toReturn
+}
+
+function isActualObject(val) {
+  return val && typeof val === 'object'
 }
