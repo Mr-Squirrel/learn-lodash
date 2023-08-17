@@ -5,5 +5,5 @@
  */
 
 export default function without(ogArr, ...valuesToRemove) {
-  return ogArr.filter((value) => value =!valuesToRemove.includes(value))
+  return ogArr.filter((value) => !valuesToRemove.includes(value))
 }
