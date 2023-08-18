@@ -26,5 +26,5 @@ export default function startsWith(inspectString, targetString, targetIndex) {
     }
   }
 
-  return inspectString.charAt(0) === targetString || inspectString.charAt(targetIndex) === targetString
+  return inspectString.charAt(0) === targetString.startsWith(targetString) || inspectString.charAt(targetIndex) === targetString.startsWith(targetString)
 }
