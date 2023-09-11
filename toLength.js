@@ -6,8 +6,6 @@ import {MAX_ARRAY_LENGTH} from './test/utils'
 
 export default function toLength(toBeConverted) {
 
-  // let numb = Number(toBeConverted)
-
   if (toBeConverted > MAX_ARRAY_LENGTH) {
     toBeConverted = MAX_ARRAY_LENGTH
   }
