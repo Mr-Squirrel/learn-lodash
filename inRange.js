@@ -21,12 +21,11 @@ export default function inRange(
     endNumber = end
   }
 
-  if (!Number(startNumber)) {
+  if (Number.isNaN(Number(startNumber))) {
     startNumber = 0
   }
 
   if (!Number(endNumber)) {
-    Number(endNumber)
     endNumber = 0
   }
 
