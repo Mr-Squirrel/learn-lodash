@@ -4,20 +4,15 @@
  * @returns {array}
  */
 
-export default function takeRight(arrayToTakeFrom, numberToTake) {
-  const falseValues = [, null, false, 0, NaN, '']
+export default function takeRight(arrayToTakeFrom, numberToTake = 1) {
 
-  if (falseValues.includes(numberToTake) && numberToTake !== undefined) {
+  if (!numberToTake && numberToTake !== undefined) {
     numberToTake = 0
-  }
-
-  if (numberToTake < 1) {
-    return []
   }
 
   if (numberToTake >= arrayToTakeFrom.length) {
     return arrayToTakeFrom
   }
 
-  return arrayToTakeFrom.slice(-numberToTake)
+  return numberToTake > 0 ? arrayToTakeFrom.slice(-numberToTake) : []
 }
