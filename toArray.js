@@ -10,5 +10,5 @@ export default function toArray(valueToConvert) {
     return [...mapEntries]
   }
 
-  return Object.values(valueToConvert)
+  return valueToConvert[Symbol.iterator] ? [...valueToConvert] : Object.values(valueToConvert)
 }
