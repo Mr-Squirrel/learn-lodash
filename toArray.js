@@ -1,6 +1,6 @@
 /**
- * @param {value} valueToConvert
- * @returns {array}
+ * @param {value} valueToConvert - the value to be converted to an array
+ * @returns {array} - the new array
  */
 
 export default function toArray(valueToConvert) {
